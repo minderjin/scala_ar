@@ -42,8 +42,7 @@ object AssociationRulesExample {
     ))
 
     val ar = new AssociationRules()
-//      .setMinConfidence(0.1)
-      .setMinSupport(0.1)
+      .setMinConfidence(0.5)
     val results = ar.run(freqItemsets)
 
     println("count : " + results.count())
