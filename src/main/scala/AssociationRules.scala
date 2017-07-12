@@ -5,6 +5,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.mllib.fpm.AssociationRules
 import org.apache.spark.mllib.fpm.FPGrowth.FreqItemset
 import org.apache.spark.mllib.fpm.FPGrowth
+import org.apache.spark.rdd.RDD
 
 object AssociationRules {
 
