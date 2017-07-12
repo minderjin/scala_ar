@@ -30,7 +30,7 @@ object AssociationRules {
 
     println("count : " + results.count())
     results.collect().foreach { rule =>
-        println(rule.antecedent.toString() + " " + rule.consequent.toString() + " " + rule.confidence)
+        println(rule.antecedent.mkString(",") + " " + rule.consequent() + " " + rule.confidence)
     }
 
     println("# pretty view #")
