@@ -36,7 +36,8 @@ object AssociationRules {
         + rule.consequent.mkString("|") + "]:\t" + rule.confidence)
     }
 
-    results.saveAsTextFile("./results.out")
+    results.saveAsTextFile("./results.1")
+    results.coalesce(1,true).saveAsTextFile("./results.2")
 
   }
 }
