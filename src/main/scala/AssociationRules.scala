@@ -1,11 +1,16 @@
 /**
   * Created by lenovo on 2017-07-12.
   */
+import java.io.File
+
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.mllib.fpm.AssociationRules
 import org.apache.spark.mllib.fpm.FPGrowth.FreqItemset
 import org.apache.spark.mllib.fpm.FPGrowth
 import org.apache.spark.rdd.RDD
+
+
+//import scalax.file.Path
 
 object AssociationRules {
 
@@ -36,8 +41,8 @@ object AssociationRules {
         + rule.consequent.mkString(",") + "]:\t" + rule.confidence)
     }
 
-    deletePath("./results.1")
-    deletePath("./results.2")
+    delete(new File("./results.1"))
+    delete(new File("./results.2"))
 
     results.saveAsTextFile("./results.1")
     results.coalesce(1,true).saveAsTextFile("./results.2")
@@ -57,12 +62,12 @@ object AssociationRules {
     file.delete
   }
 
-  def deletePath(pathStr: String): Unit = {
-    val path = Path.fromString(pathStr)
-    try {
-      path.deleteRecursively(continueOnFailure = false)
-    } catch {
-      case e: IOException => // some file could not be deleted
-    }
-  }
+//  def deletePath(pathStr: String): Unit = {
+//    val path = Path.fromString(pathStr)
+//    try {
+//      path.deleteRecursively(continueOnFailure = false)
+//    } catch {
+//      case e: IOException => // some file could not be deleted
+//    }
+//  }
 }
