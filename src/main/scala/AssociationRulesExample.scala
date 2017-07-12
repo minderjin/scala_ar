@@ -45,6 +45,8 @@ object AssociationRulesExample {
       .setMinConfidence(0.8)
     val results = ar.run(freqItemsets)
 
+    println("count : " + results.count())
+
     results.collect().foreach { rule =>
       println("[" + rule.antecedent.mkString(",")
         + "=>"
