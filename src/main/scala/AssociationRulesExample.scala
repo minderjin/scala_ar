@@ -34,7 +34,11 @@ object AssociationRulesExample {
     val freqItemsets = sc.parallelize(Seq(
       new FreqItemset(Array("a"), 15L),
       new FreqItemset(Array("b"), 35L),
-      new FreqItemset(Array("a", "b"), 12L)
+      new FreqItemset(Array("a", "b"), 12L),
+      new FreqItemset(Array("c"), 12L),
+      new FreqItemset(Array("d"), 22L),
+      new FreqItemset(Array("e"), 12L),
+      new FreqItemset(Array("c","d","e"), 35L)
     ))
 
     val ar = new AssociationRules()
