@@ -9,7 +9,7 @@ import org.apache.spark.mllib.fpm.FPGrowth
 object AssociationRules {
 
   def main(args: Array[String]) {
-    val conf = new SparkConf().setAppName("AssociationRulesExample")
+    val conf = new SparkConf().setAppName("AssociationRules")
     val sc = new SparkContext(conf)
 
     val data = sc.textFile("./ar.basket")
