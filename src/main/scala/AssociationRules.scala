@@ -36,7 +36,7 @@ object AssociationRules {
     println("# pretty view #")
     results.collect().foreach { rule =>
       println("[" + rule.antecedent.mkString("|")
-        + " => "
+        + "=>"
         + rule.consequent.mkString("|") + "]: " + rule.confidence)
     }
 
