@@ -24,7 +24,7 @@ object AssociationRules {
     val model = fpg.run(transactions) // creates the FPGrowthModel
 
     val ar = new AssociationRules()
-      .setMinConfidence(0.8)
+      .setMinConfidence(0.1)
 
     val results = ar.run(model.freqItemsets)
 
