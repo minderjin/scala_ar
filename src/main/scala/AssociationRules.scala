@@ -31,13 +31,38 @@ object AssociationRules {
     println("#result count : " + results.count())
 
     results.collect().foreach { rule =>
-      println("[" + rule.antecedent.mkString("|")
+      println("[" + rule.antecedent.mkString(",")
         + "=>"
-        + rule.consequent.mkString("|") + "]:\t" + rule.confidence)
+        + rule.consequent.mkString(",") + "]:\t" + rule.confidence)
     }
+
+    deletePath("./results.1")
+    deletePath("./results.2")
 
     results.saveAsTextFile("./results.1")
     results.coalesce(1,true).saveAsTextFile("./results.2")
 
+  }
+
+  def deleteRecursively(file: File): Unit = {
+    if (file.isDirectory)
+      file.listFiles.foreach(deleteRecursively)
+    if (file.exists && !file.delete)
+      throw new Exception(s"Unable to delete ${file.getAbsolutePath}")
+  }
+
+  def delete(file: File) {
+    if (file.isDirectory)
+      Option(file.listFiles).map(_.toList).getOrElse(Nil).foreach(delete(_))
+    file.delete
+  }
+
+  def deletePath(pathStr: String): Unit = {
+    val path = Path.fromString(pathStr)
+    try {
+      path.deleteRecursively(continueOnFailure = false)
+    } catch {
+      case e: IOException => // some file could not be deleted
+    }
   }
 }
