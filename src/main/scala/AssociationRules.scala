@@ -28,8 +28,10 @@ object AssociationRules {
 
     val results = ar.run(model.freqItemsets)
 
-
     println("count : " + results.count())
+    results.collect().foreach { rule =>
+        println(rule.antecedent + " " + rule.consequent + " " + rule.confidence)
+    }
 
     results.collect().foreach { rule =>
       println("[" + rule.antecedent.mkString(",")
