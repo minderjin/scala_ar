@@ -18,7 +18,7 @@ object AssociationRules {
     val conf = new SparkConf().setAppName("AssociationRules")
     val sc = new SparkContext(conf)
 
-    val data = sc.textFile("./ar.basket")
+    val data = sc.textFile("/input/ar.basket")
 
     val transactions: RDD[Array[String]] = data.map(s => s.trim.split(','))
 
@@ -28,24 +28,28 @@ object AssociationRules {
 
     val model = fpg.run(transactions) // creates the FPGrowthModel
 
+    // Confidence 설정
     val ar = new AssociationRules()
       .setMinConfidence(0.1)
 
+    // RUN
     val results = ar.run(model.freqItemsets)
 
+    // 결과 화면 출력
     println("#result count : " + results.count())
-
     results.collect().foreach { rule =>
       println("[" + rule.antecedent.mkString(",")
         + "=>"
         + rule.consequent.mkString(",") + "]:\t" + rule.confidence)
     }
 
-    delete(new File("./results.1"))
-    delete(new File("./results.2"))
+    // 기존에 생성된 Directory(results) 삭제
+    delete(new File("/output/results.1"))
+    delete(new File("/output/results.2"))
 
-    results.saveAsTextFile("./results.1")
-    results.coalesce(1,true).saveAsTextFile("./results.2")
+    // 결과 파일 생성
+    results.saveAsTextFile("/output/results.1")
+    results.coalesce(1,true).saveAsTextFile("/output/results.2")
 
   }
 

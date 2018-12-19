@@ -1,0 +1,2 @@
+#!/bin/sh
+spark-submit --class "org.apache.spark.examples.mllib.AssociationRulesExample" --master local[4] /home/spark/work/scala_ar/target/scala-2.11/scala_ar_2.11-1.0.jar
